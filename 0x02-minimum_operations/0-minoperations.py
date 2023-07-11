@@ -23,7 +23,7 @@ Number of operations: 6
 
 def minOperations(n):
     """ The function """
-    if n <= 1 and type(n) is not int:
+    if n <= 1 or type(n) is not int:
         return 0
 
     no_H = 1
