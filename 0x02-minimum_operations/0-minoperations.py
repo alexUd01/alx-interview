@@ -30,7 +30,7 @@ def minOperations(n):
     count = 1  # First operation `Copy All` (a must)
 
     while no_H < n:
-        if no_H >= 3:
+        if no_H >= 2:
             if no_H * 2 <= n:
                 no_H *= 2
                 count += 2  # `Copy` then `Paste` (2 operations)
