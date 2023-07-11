@@ -27,7 +27,7 @@ def minOperations(n):
         return 0
 
     no_H = 1
-    count = 1 # First operation `Copy All` (a must)
+    count = 1  # First operation `Copy All` (a must)
 
     while no_H < n:
         if no_H >= 3:
