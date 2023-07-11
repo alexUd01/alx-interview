@@ -11,5 +11,5 @@ print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
 n = 12
 print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
 
-n = 5
+n = 100000000000000000000000000000000
 print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))

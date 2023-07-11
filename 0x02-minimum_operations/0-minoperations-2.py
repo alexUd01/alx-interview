@@ -26,13 +26,19 @@ def minOperations(n):
     if n <= 1 or type(n) is not int:
         return 0
 
-    ops, root = 0, 2
-    while root <= n:
-        if n % root == 0:  # if n evenly divides by root
-            # total even-divisions by root = total operations
-            ops += root
-            n = n / root  # set n to the remainder
-            # reduce root to find remaining smaller vals that evenly-divide n
-            root -= 1
-        root += 1  # increment root until it evenly-divides n
-    return ops
+    no_H = 1
+    count = 1  # First operation `Copy All` (a must)
+
+    while no_H < n:
+        if no_H >= 2:
+            if no_H * 2 <= n:
+                no_H *= 2
+                count += 2  # `Copy` then `Paste` (2 operations)
+            else:
+                no_H *= 2
+                count += 1  # `Paste operation only`
+        else:
+            no_H += 1
+            count += 1
+
+    return count
