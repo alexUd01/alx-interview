@@ -21,14 +21,18 @@ INSTRUCTIONS:
 """
 import sys
 
+codes = [200, 301, 400, 401, 403, 404, 405, 500]
+
 
 def valid_line(lst):
     """ Validates the simulated log lines """
     if len(lst) != 9:
         return False
     try:
-        x = int(lst[-1])
-        x = int(lst[-2])
+        file_size = int(lst[-1])
+        status_code = int(lst[-2])
+        if status_code not in codes:
+            return False
     except ValueError:
         return False
     else:
