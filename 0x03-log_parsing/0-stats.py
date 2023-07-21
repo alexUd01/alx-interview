@@ -64,13 +64,15 @@ if __name__ == "__main__":
 
     try:
         for log_line in sys.stdin:
-            file_size, code = compute_stat(log_line)
-            if file_size is None and code is None:
-                continue
-            total_file_size += file_size
-            code_list.append(code)
             count += 1
-            if count % 10 == 0:
+            if count <= 10:
+                file_size, code = compute_stat(log_line)
+                if file_size is None and code is None:
+                    continue
+                total_file_size += file_size
+                code_list.append(code)
+            if count == 10:
                 print_stat(total_file_size, code_list)
-    except KeyboardInterrupt:
+                count = 0
+    finally:
         print_stat(total_file_size, code_list)
