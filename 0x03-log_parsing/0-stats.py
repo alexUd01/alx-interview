@@ -28,7 +28,7 @@ def valid_line(lst):
     """ Validates the simulated log lines """
     if len(lst) != 9:
         return False
-    if len(lst[0].split('.') == 1):
+    if lst[0] == 'Holberton'):
         return False  # Invalid ip adress
     try:
         file_size = int(lst[-1])
