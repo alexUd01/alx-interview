@@ -20,21 +20,40 @@ INSTRUCTIONS:
     - status codes should be printed in ascending order
 """
 import sys
+import re
 
 codes = [200, 301, 400, 401, 403, 404, 405, 500]
+valid_requests = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 
 
 def valid_line(lst):
     """ Validates the simulated log lines """
     if len(lst) != 9:
         return False
-    if lst[0] == 'Holberton':
-        return False  # Invalid ip adress
+    if lst[1] != '-':
+        return False
+    # 2. Validate date
+    if not re.fullmatch('\[[0-9]{4}-[0-9]{2}-[0-9]{2}', lst[2]):
+        return False
+    # 3. Validate time
+    if not re.fullmatch('[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{6}]', lst[3]):
+        return False
+    # 3. Validate HTTP request
+    if lst[4].strip('"') not in valid_requests:
+        return False
+
     try:
-        file_size = int(lst[-1])
+        # 1. Validate IP addresses
+        ip_address = lst[0].split('.')
+        for num in ip_address:
+            if int(num) > 255 or int(num) < 0:
+                return False
+        # Validate status code
         status_code = int(lst[-2])
         if status_code not in codes:
             return False
+        # Validate file size
+        file_size = int(lst[-1])
     except ValueError:
         return False
     else:
