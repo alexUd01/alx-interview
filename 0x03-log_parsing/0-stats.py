@@ -52,7 +52,8 @@ def compute_stat(line):
 def print_stat(size, code_list):
     """ Prints computed stats """
     print("File size: {:d}".format(size))
-    for code in set(sorted(code_list)):
+    temp = list(set(code_list))
+    for code in sorted(temp):
         print("{}: {}".format(code, code_list.count(code)))
 
 
