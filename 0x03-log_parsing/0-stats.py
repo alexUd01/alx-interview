@@ -24,7 +24,7 @@ import sys
 
 def valid_line(lst):
     """ Validates the simulated log lines """
-    if len(lst) != 11:
+    if len(lst) != 9:
         return False
     try:
         x = int(lst[-1])
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     try:
         for log_line in sys.stdin:
             file_size, code = compute_stat(log_line)
-            if file_size is None:
+            if file_size is None and code is None:
                 continue
             total_file_size += file_size
             code_list.append(code)
@@ -69,6 +69,4 @@ if __name__ == "__main__":
             if count % 10 == 0:
                 print_stat(total_file_size, code_list)
     except KeyboardInterrupt:
-        pass
-    finally:
         print_stat(total_file_size, code_list)
