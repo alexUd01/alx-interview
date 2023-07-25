@@ -13,51 +13,73 @@ INSTRUCTIONS:
 """
 
 
-def to_bin(n):
-    """ Converts integers to binary representation """
-    return bin(n)[2:]
-
-
 def validUTF8(data):
-    """ The function """
-    # Just a pre-check using assertions
+    """
+    Check if the given data represents a valid UTF-8 encoding.
+
+    Args:
+    data (list[int]): A list of integers representing 1-byte data.
+
+    Returns:
+    bool: True if data is a valid UTF-8 encoding, False otherwise.
+    """
+
     if not isinstance(data, list):
         return False
-    for item in data:
-        if not isinstance(item, int):
-            return False
 
-    if data[0] < 128:  # 1 byte encoding (regular ACSII characters)
-        for item in data[1:]:
-            if item >= 128:
-                return False
-        return True
-    else:  # More than 1 byte encoding
-        first_byte = to_bin(data[0])
-        try:
-            expected_nb_bytes = first_byte.index('0')
-        except IndexError:
+    def is_valid_code_point(code_point):
+        # Check if the code point is within valid Unicode range
+        if (0xD800 <= code_point <= 0xDFFF) or (0xFDD0 <= code_point <= 0xFDEF):
             return False
+        return code_point <= 0x10FFFF
+
+    def is_overlong_encoding(byte_count, code_point):
+        # Check for overlong encodings (UTF-8 characters represented with more bytes than necessary)
+        return (
+            (byte_count == 1 and code_point <= 0x7F)
+            or (byte_count == 2 and code_point <= 0x7FF)
+            or (byte_count == 3 and code_point <= 0xFFFF)
+            or (byte_count == 4 and code_point <= 0x10FFFF)
+        )
+
+    idx = 0
+    while idx < len(data):
+        first_byte = data[idx]
+
+        if first_byte < 0x80:  # 1 byte encoding (regular ASCII characters)
+            idx += 1
+            continue
+
+        # Find the number of bytes in the UTF-8 character
+        if first_byte & 0xE0 == 0xC0:  # 2 bytes
+            byte_count = 2
+            code_point = first_byte & 0x1F
+        elif first_byte & 0xF0 == 0xE0:  # 3 bytes
+            byte_count = 3
+            code_point = first_byte & 0x0F
+        elif first_byte & 0xF8 == 0xF0:  # 4 bytes
+            byte_count = 4
+            code_point = first_byte & 0x07
         else:
-            if expected_nb_bytes > 6:  # Maximum possible bit reached
+            # Invalid UTF-8 start byte
+            return False
+
+        idx += 1
+
+        # Check continuation bytes
+        for i in range(byte_count - 1):
+            if idx >= len(data):
                 return False
-            if len(data) != expected_nb_bytes:
+
+            cont_byte = data[idx]
+            if cont_byte & 0xC0 != 0x80:  # Continuation byte must start with '10'
                 return False
-            # Evaluate the remaining items on the list
-            for i in range(1, len(data)):  # Start iteration from the 2nd item
-                bin_repr = to_bin(data[i])
-                if bin_repr[0:2] != '10':  # Cont. bytes must be 10xxxxxx
-                    return False
-            return True
 
+            code_point = (code_point << 6) | (cont_byte & 0x3F)
+            idx += 1
 
-if __name__ == "__main__":
-    import random
+        if not is_valid_code_point(code_point) or is_overlong_encoding(byte_count, code_point):
+            return False
 
-    def generate_random_integer_list(length):
-        return [random.randint(0, 255) for _ in range(length)]
+    return True
 
-    # Example usage:
-    random_list = generate_random_integer_list(2)
-    print(random_list)
-    print(validUTF8(random_list))
