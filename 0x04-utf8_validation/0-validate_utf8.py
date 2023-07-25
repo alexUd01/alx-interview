@@ -15,7 +15,30 @@ INSTRUCTIONS:
 def validUTF8(data):
     """ The function """
     assert type(data) is list
-    for utf_char in data:
-        if utf_char > 255:
+
+    if data[0] < 128:  # 1 byte encoding (regular ACSII characters)
+        for item in data:
+            if not item < 128:
+                return False
+        else:
+            return True
+    else:  # More than 1 byte encoding
+        first_byte = bin(data[0])[2:]
+        try:
+            expected_nb_bytes = first_byte.index('0')
+        except IndexError:
             return False
-    return True
+        else:
+            if expected_nb_bytes > 6:  # Maximum possible bit reached
+                return False
+            if len(data) != expected_nb_bytes:
+                return False
+            # Evaluate the remaining items on the list
+            for i in range(1, len(data)):  # Start iteration from the 2nd item
+                bin_repr = bin(data[i])[2:]
+                if bin_repr.find('0') != 1:  # Cont. bytes must be 10xxxxxx
+                    return False
+            else:
+                return True
+    print("Not Implemented yet")
+    return False
