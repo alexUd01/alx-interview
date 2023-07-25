@@ -13,16 +13,22 @@ INSTRUCTIONS:
 """
 
 
+def to_bin(n):
+    """ Converts integers to binary representation """
+    return bin(n)[2:]
+
+
 def validUTF8(data):
     """ The function """
+    assert type(data) is list
+
     if data[0] < 128:  # 1 byte encoding (regular ACSII characters)
-        for item in data:
-            if not item < 128:
+        for item in data[1:]:
+            if item >= 128:
                 return False
-        else:
-            return True
+        return True
     else:  # More than 1 byte encoding
-        first_byte = bin(data[0])[2:]
+        first_byte = to_bin(data[0])
         try:
             expected_nb_bytes = first_byte.index('0')
         except IndexError:
@@ -34,8 +40,19 @@ def validUTF8(data):
                 return False
             # Evaluate the remaining items on the list
             for i in range(1, len(data)):  # Start iteration from the 2nd item
-                bin_repr = bin(data[i])[2:]
-                if bin_repr.find('0') != 1:  # Cont. bytes must be 10xxxxxx
+                bin_repr = to_bin(data[i])
+                if bin_repr[0:2] != '10':  # Cont. bytes must be 10xxxxxx
                     return False
-            else:
-                return True
+            return True
+
+
+if __name__ == "__main__":
+    import random
+
+    def generate_random_integer_list(length):
+        return [random.randint(0, 255) for _ in range(length)]
+
+    # Example usage:
+    random_list = generate_random_integer_list(2)
+    print(random_list)
+    print(validUTF8(random_list))
