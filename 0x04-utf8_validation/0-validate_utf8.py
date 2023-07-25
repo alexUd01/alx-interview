@@ -15,8 +15,6 @@ INSTRUCTIONS:
 
 def validUTF8(data):
     """ The function """
-    assert type(data) is list
-
     if data[0] < 128:  # 1 byte encoding (regular ACSII characters)
         for item in data:
             if not item < 128:
