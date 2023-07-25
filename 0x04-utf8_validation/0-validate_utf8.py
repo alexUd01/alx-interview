@@ -20,7 +20,12 @@ def to_bin(n):
 
 def validUTF8(data):
     """ The function """
-    assert type(data) is list
+    # Just a pre-check using assertions
+    if not isinstance(data, list):
+        return False
+    for item in data:
+        if not isinstance(item, int):
+            return False
 
     if data[0] < 128:  # 1 byte encoding (regular ACSII characters)
         for item in data[1:]:
