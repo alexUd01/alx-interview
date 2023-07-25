@@ -12,6 +12,7 @@ INSTRUCTIONS:
   the 8 least significant bits of each integer
 """
 
+
 def validUTF8(data):
     """ The function """
     assert type(data) is list
