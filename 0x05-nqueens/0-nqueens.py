@@ -52,4 +52,4 @@ class NQueen:
 
 if len(sys.argv) != 2:
     print("Usage: nqueens N")
-    quit(1)
+    sys.exit(1)
