@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+""" N-queens interview question """
+
 if len(sys.argv) > 2 or len(sys.argv) < 2:
     print("Usage: nqueens N")
     exit(1)
