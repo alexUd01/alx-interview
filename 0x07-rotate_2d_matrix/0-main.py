@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 """
 Test 0x07 - Rotate 2D Matrix
+
+Example:
+=======
+alex@kali-$ ./0-main.py
+[[7, 4, 1],
+[8, 5, 2],
+[9, 6, 3]]
+
 """
 rotate_2d_matrix = __import__('0-rotate_2d_matrix').rotate_2d_matrix
 

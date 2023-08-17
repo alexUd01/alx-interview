@@ -8,5 +8,28 @@ Given an `n` x `n` 2D matrix, rotate it 90 degrees clockwise.
 """
 
 
+def clone_matrix(matrix):
+    """ A helper function that clones and returns a list of lists  """
+    clone = []
+    for row in matrix:
+        item = []
+        for col in row:
+            item.append(col)
+        clone.append(item)
+    return clone
+
+
 def rotate_2d_matrix(matrix):
     """ a function that rotates a 2D matrix by 90 degrees """
+    n = len(matrix)
+    clone = clone_matrix(matrix)
+
+    for row in range(n):
+        k = n - 1
+        for col in range(n):
+            matrix[row][col] = clone[k][row]
+            # print('matrix[{}][{}] = clone[{}][{}] (ie. {})'.format(
+            # row, col, k, row, clone[k][row]))
+            k -= 1
+            if k == -1:
+                break
