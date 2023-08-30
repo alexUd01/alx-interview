@@ -17,12 +17,12 @@ INSTRUCTIONS:
 """
 
 
-def count_surrounding_water(_list):
+def count_surrounding_water(*args):
     """
     A helper function that calculates and returns the unit length of a `1`
     on the `grid`.
     """
-    return _list.count(0)
+    return args.count(0)
 
 
 def island_perimeter(grid):
@@ -50,6 +50,6 @@ def island_perimeter(grid):
                     rght = 0
                 else:
                     rght = grid[i][j + 1]
-                perimeter += count_surrounding_water([abv, bel, left, rght])
+                perimeter += count_surrounding_water(abv, bel, left, rght)
 
     return perimeter
