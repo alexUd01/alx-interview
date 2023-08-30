@@ -16,12 +16,14 @@ INSTRUCTIONS:
   water surrounding the island).
 """
 
+
 def count_surrounding_water(_list):
     """
     A helper function that calculates and returns the unit length of a `1`
     on the `grid`.
     """
     return _list.count(0)
+
 
 def island_perimeter(grid):
     """ The function """
