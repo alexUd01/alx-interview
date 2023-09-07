@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Result: Ben has the most wins
+Check readme.md for instructions
 """
 
 
@@ -31,12 +31,12 @@ def isWinner(x, nums):
             if temp == [1]:
                 if curr_player is None:
                     players_score['Maria'] += 1
-                    print("{} won this round!\n".format('Maria'))
+                    # >print("{} won this round!\n".format('Maria'))
                 else:
                     curr_player = \
                         'Maria' if curr_player in [None, 'Ben'] else 'Ben'
                     players_score[curr_player] += 1
-                    print("{} won this round!\n".format(curr_player))
+                    # >print("{} won this round!\n".format(curr_player))
                 break
 
             if is_prime(item):
@@ -44,13 +44,13 @@ def isWinner(x, nums):
                     'Ben'
                 # remove multiples of `item` from the list
                 temp = list(filter(lambda x: (x % item) != 0, temp))
-                print("{} removed {}... ==== {}".format(curr_player, item, temp))
+                # >print("{} removed {}... ==== {}".format(curr_player, item, temp))
                 if temp == [1]:
                     players_score[curr_player] += 1
-                    print("{} won this round!\n".format(curr_player))
+                    # >print("{} won this round!\n".format(curr_player))
                     break
                 continue
-    print("Maria = {}, Ben = {}".format(players_score['Maria'], players_score['Ben']))
+    # >print("Maria = {}, Ben = {}".format(players_score['Maria'], players_score['Ben']))
     if players_score['Maria'] > players_score['Ben']:
         return 'Maria'
     else:
