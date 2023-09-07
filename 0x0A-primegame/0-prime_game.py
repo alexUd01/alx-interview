@@ -90,8 +90,3 @@ def isWinner(x, nums):
         return 'Maria'
     else:
         return 'Ben'
-
-
-    # 1. Organize your thoughts (Philipians 4:8)
-    # 2. Living a respectful life. Love and fear of God.
-    # 3. Study the word of the lrd continually
