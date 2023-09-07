@@ -92,11 +92,6 @@ def isWinner(x, nums):
         return 'Ben'
 
 
-# 1. Organize your thoughts (Philipians 4:8)
-# 2. Living a respectful life. Love and fear of God.
-# 3. Study the word of the lrd continually
-# 4.
-# 5.
-if __name__ == "__main__":
-    for i in range(100):
-        print("{} {}".format(i, is_prime(i)))
+    # 1. Organize your thoughts (Philipians 4:8)
+    # 2. Living a respectful life. Love and fear of God.
+    # 3. Study the word of the lrd continually
