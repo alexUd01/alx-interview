@@ -30,9 +30,10 @@ def isWinner(x, nums):
         for item in temp.copy():
             if temp == [1]:
                 if curr_player is None:
-                    players_score['Maria'] += 1
-                    # >print("{} won this round!\n".format('Maria'))
-                else:
+                    players_score['Ben'] += 1
+                    # >print("{} won this round!\n".format('Ben'))
+                else:  # This else block should never run (no matter what)
+                    print('-- This code block should not run at all --')
                     curr_player = \
                         'Maria' if curr_player in [None, 'Ben'] else 'Ben'
                     players_score[curr_player] += 1
@@ -40,17 +41,20 @@ def isWinner(x, nums):
                 break
 
             if is_prime(item):
-                curr_player = 'Maria' if curr_player in [None, 'Ben'] else \
-                    'Ben'
+                curr_player = \
+                    'Maria' if curr_player in [None, 'Ben'] else 'Ben'
                 # remove multiples of `item` from the list
                 temp = list(filter(lambda x: (x % item) != 0, temp))
-                # >print("{} removed {}... ==== {}".format(curr_player, item, temp))
+                # >print("{} removed {}... ==== {}".format(curr_player, item, \
+                # temp))
                 if temp == [1]:
                     players_score[curr_player] += 1
                     # >print("{} won this round!\n".format(curr_player))
+                    curr_player = None
                     break
                 continue
-    # >print("Maria = {}, Ben = {}".format(players_score['Maria'], players_score['Ben']))
+    # >print("Maria = {}, Ben = {}".format(players_score['Maria'], \
+    # players_score['Ben']))
     if players_score['Maria'] > players_score['Ben']:
         return 'Maria'
     else:

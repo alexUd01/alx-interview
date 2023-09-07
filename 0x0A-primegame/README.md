@@ -33,3 +33,43 @@ Third round: 1
 - Ben wins because there are no prime numbers for Maria to choose
 
 Result: Ben has the most wins
+
+ROUND 1
+[1, 2]
+Maria removes 2 => [1]
+Ben can't move.
+Maria wins!!!
+
+ROUND 2
+[1, 2, 3, 4, 5]
+Maria removes 2, 4 => [1, 3, 5]
+Ben removes 3 => [1, 5]
+Maria removes 5 => [1]
+Ben can't move
+Maria wins!!!
+
+ROUND 3
+[1]
+Maria can't make a move
+Ben wins!!!
+
+ROUND 4
+[1, 2, 3, 4]
+Maria removes 2, 4 => [1, 3]
+Ben removes 3 => [1]
+Maria can't move
+Ben wins!!!
+
+ROUND 5
+[1, 2, 3]
+Maria removes 2 => [1, 3]
+Ben removes 3 => [1]
+Maria can't move
+Ben wins!!!
+
+Total:
+=====
+Maria = 2
+Ben   = 3
+
+Result: Ben has the most wins
