@@ -62,31 +62,35 @@ def isWinner(x, nums):
         temp = list(range(1, n + 1))
         for item in temp.copy():
             if temp == [1]:
-                if curr_player == None:
+                if curr_player is None:
                     players_score['Maria'] += 1
-                    #>print("{} won this round!\n".format('Maria'))
+                    # >print("{} won this round!\n".format('Maria'))
                 else:
                     curr_player = \
                         'Maria' if curr_player in [None, 'Ben'] else 'Ben'
                     players_score[curr_player] += 1
-                    #>print("{} won this round!\n".format(curr_player))
+                    # >print("{} won this round!\n".format(curr_player))
                 break
 
             if is_prime(item):
-                curr_player = 'Maria' if curr_player in [None, 'Ben'] else 'Ben'
+                curr_player = 'Maria' if curr_player in [None, 'Ben'] else \
+                    'Ben'
                 # remove multiples of `item` from the list
                 temp = list(filter(lambda x: (x % item) != 0, temp))
-                #>print("{} removed {}... ==== {}".format(curr_player, item, temp))
+                # >print("{} removed {}... ==== {}".format(curr_player, item,
+                # \temp))
                 if temp == [1]:
                     players_score[curr_player] += 1
-                    #>print("{} won this round!\n".format(curr_player))
+                    # >print("{} won this round!\n".format(curr_player))
                     break
                 continue
-    #>print("Maria = {}, Ben = {}".format(players_score['Maria'], players_score['Ben']))
+    # >print("Maria = {}, Ben = {}".format(players_score['Maria'],
+    # \players_score['Ben']))
     if players_score['Maria'] > players_score['Ben']:
         return 'Maria'
     else:
         return 'Ben'
+
 
 # 1. Organize your thoughts (Philipians 4:8)
 # 2. Living a respectful life. Love and fear of God.
